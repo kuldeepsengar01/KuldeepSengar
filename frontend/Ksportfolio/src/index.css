@@ -1,0 +1,401 @@
+@import "tailwindcss";
+
+/* ================================
+   GLOBAL
+================================ */
+
+html {
+  scroll-behavior: smooth;
+  background: #000;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #000;
+  color: white;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: #a855f7;
+  color: white;
+}
+
+
+/* ================================
+   SCROLLBAR
+================================ */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7e22ce;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a855f7;
+}
+
+
+/* ================================
+   GRADIENT TEXT
+================================ */
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #e9d5ff,
+    #a855f7,
+    #7c3aed
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+
+/* ================================
+   GLASS CARD
+================================ */
+
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.03);
+
+  border-radius: 18px;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(168, 85, 247, 0.35);
+
+  background: rgba(168, 85, 247, 0.05);
+}
+
+
+/* ================================
+   PROFILE IMAGE
+================================ */
+
+.profile-image {
+  transition: transform 0.6s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.03);
+}
+
+
+/* ================================
+   FLOATING CARD
+================================ */
+
+.float-animation {
+  animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+}
+
+
+/* ================================
+   SKILLS MARQUEE
+================================ */
+
+.skill-marquee {
+  width: 100%;
+  overflow: hidden;
+
+  position: relative;
+
+  padding: 20px 0;
+
+  /* Fade edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+
+/* ================================
+   SKILLS TRACK
+================================ */
+
+.skill-track {
+  display: flex;
+
+  align-items: center;
+
+  width: max-content;
+
+  gap: 24px;
+
+  /*
+    20 seconds = speed
+    lower = faster
+  */
+  animation: skillScroll 20s linear infinite;
+
+  will-change: transform;
+}
+
+
+/* Pause on hover */
+
+.skill-marquee:hover .skill-track {
+  animation-play-state: paused;
+}
+
+
+/* ================================
+   SKILL CARD
+================================ */
+
+.skill-card {
+  width: 90px;
+  height: 90px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px) scale(1.05);
+
+  border-color: rgba(168, 85, 247, 0.5);
+
+  background: rgba(168, 85, 247, 0.08);
+
+  box-shadow:
+    0 15px 40px rgba(168, 85, 247, 0.15);
+}
+
+
+/* ================================
+   SKILL IMAGE
+================================ */
+
+.skill-card img {
+  width: 55px;
+  height: 55px;
+
+  object-fit: contain;
+
+  display: block;
+
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover img {
+  transform: scale(1.12);
+}
+
+
+/* ================================
+   INFINITE SCROLL
+================================ */
+
+@keyframes skillScroll {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    /*
+      Because Skills.jsx contains
+      the same list twice.
+    */
+    transform: translateX(-50%);
+  }
+
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 640px) {
+
+  .skill-track {
+    gap: 16px;
+
+    animation-duration: 15s;
+  }
+
+  .skill-card {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 16px;
+  }
+
+  .skill-card img {
+    width: 42px;
+    height: 42px;
+  }
+
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+
+  .skill-card {
+    width: 80px;
+    height: 80px;
+  }
+
+  .skill-card img {
+    width: 48px;
+    height: 48px;
+  }
+
+}
+
+
+/* ================================
+   REDUCED MOTION
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .skill-track {
+    animation: none;
+  }
+
+  .float-animation {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+
+}
+
+/* ===============================
+   SKILLS AUTO SCROLL
+================================ */
+
+.skills-marquee {
+  display: flex;
+  width: max-content;
+  animation: skills-scroll 30s linear infinite;
+}
+
+.skills-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.skills-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes skills-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .skills-marquee {
+    animation-duration: 22s;
+  }
+
+  .skills-track {
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
