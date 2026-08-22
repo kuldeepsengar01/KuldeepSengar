@@ -18,7 +18,7 @@ const Projects = () => {
         "Imagekit"
       ],
       github: "https://github.com/kuldeepsengar01/KS-weather-App",
-      live: "https://ks-weather-app-tau.vercel.app/login",
+      live: "https://ks-weather-app-tau.vercel.app",
     },
     {
       title: "KS AI",
