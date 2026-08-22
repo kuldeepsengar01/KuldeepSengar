@@ -4,6 +4,23 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 const Projects = () => {
   const projects = [
     {
+      title: "KS Weather App",
+      type: "FULL STACK",
+      description:
+        "A Modern Weather Application designed to give you fast, clean and useful weather informnation wherever you are. And It provide full Authentication to protect user accounts.",
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "Express",
+        "Open-Meteo",
+        "MongoDB",
+        "Node js",
+        "Imagekit"
+      ],
+      github: "https://github.com/kuldeepsengar01/KS-weather-App",
+      live: "https://ks-weather-app-tau.vercel.app/login",
+    },
+    {
       title: "KS AI",
       type: "FULL STACK",
       description:
