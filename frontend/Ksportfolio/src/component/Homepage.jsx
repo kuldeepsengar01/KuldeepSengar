@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import KuldeepAI from "./KuldeepAI";
 
 const Homepage = () => {
   const skills = [
@@ -513,7 +514,7 @@ const Homepage = () => {
         </Link>
 
       </section>
-
+      <KuldeepAI />
     </main>
   );
 };
