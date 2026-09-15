@@ -7,6 +7,7 @@ import About from "../component/About";
 import Skills from "../component/Skills";
 import Projects from "../component/Projects";
 import Contact from "../component/Contact";
+import Certificate from "../component/Certificate";
 
 const AppRoutes = () => {
   return (
@@ -41,7 +42,13 @@ const AppRoutes = () => {
           element={<Projects />}
         />
 
-        {/* Contact */}
+        {/* Certificate */}
+        <Route
+          path="/certificate"
+          element={<Certificate />}
+        />
+
+        {/* Contact */} 
         <Route
           path="/contact"
           element={<Contact />}
