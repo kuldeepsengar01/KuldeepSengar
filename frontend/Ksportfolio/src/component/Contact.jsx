@@ -40,7 +40,7 @@ const Contact = () => {
     {
       name: "Instagram",
       icon: <FaInstagram />,
-      link: "https://instagram.com/",
+      link: "https://www.instagram.com/kuldeep_sengar_01",
     },
   ];
 
