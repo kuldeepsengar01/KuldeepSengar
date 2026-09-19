@@ -197,6 +197,7 @@ const KuldeepAI = () => {
     certificates: [
       "Codomax Internship Certificate",
       "JavaScript Certificate",
+      "HTML Certificate"
     ],
   };
 
