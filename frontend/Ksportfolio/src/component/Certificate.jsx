@@ -10,11 +10,18 @@ const Certificates = [
       "https://ik.imagekit.io/kuldeepsengar01/Kuldeep_Sengar_Internship_Certificate%20(1)_page-0001.jpg",
   },
   {
-    title: "Java Script Certificate",
-    issuer: "Certificate Issuer",
+    title: "JavaScript Certificate",
+    issuer: "Codeliber",
     date: "2026",
     image:
       "https://ik.imagekit.io/kuldeepsengar01/codeliber-js-KULDEEP_SENGAR_.png",
+  },
+  {
+    title: "HTML Certificate",
+    issuer: "Codeliber",
+    date: "2026",
+    image:
+      "https://ik.imagekit.io/kuldeepsengar01/codeliber-html-KULDEEP_SENGAR_.png",
   },
 ];
 
