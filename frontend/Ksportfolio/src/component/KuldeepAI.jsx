@@ -6,6 +6,7 @@ import {
   User,
   Sparkles,
   Trash2,
+  ExternalLink,
 } from "lucide-react";
 
 const KuldeepAI = () => {
@@ -17,7 +18,7 @@ const KuldeepAI = () => {
     {
       id: 1,
       sender: "ai",
-      text: "Hi 👋 I'm KuldeepAI. Ask me anything about Kuldeep, his skills, projects, education or experience.",
+      text: "Hi 👋 I'm KuldeepAI. Ask me anything about Kuldeep, his skills, projects, education, certificates or experience.",
     },
   ]);
 
@@ -44,34 +45,16 @@ const KuldeepAI = () => {
         "Tailwind CSS",
       ],
 
-      backend: [
-        "Node.js",
-        "Express",
-      ],
+      backend: ["Node.js", "Express"],
 
-      database: [
-        "MongoDB",
-        "MySQL",
-      ],
+      database: ["MongoDB", "MySQL"],
 
-      programming: [
-        "Java",
-        "JavaScript",
-      ],
+      programming: ["Java", "JavaScript"],
 
-      tools: [
-        "Git",
-        "GitHub",
-        "Postman",
-      ],
+      tools: ["Git", "GitHub", "Postman"],
     },
 
-    learning: [
-      "Java",
-      "DSA",
-      "Spring Boot",
-      "MySQL",
-    ],
+    learning: ["Java", "DSA", "Spring Boot", "MySQL"],
 
     projects: {
       "KS CHATS": {
@@ -79,6 +62,7 @@ const KuldeepAI = () => {
           "chat",
           "chatting",
           "message",
+          "messages",
           "messaging",
           "conversation",
           "communication",
@@ -113,13 +97,9 @@ const KuldeepAI = () => {
         ],
 
         description:
-          "StarPeek is a web application focused on food partners and discovery.",
+          "StarPeek is a web application focused on food partners and food discovery.",
 
-        technologies: [
-          "React",
-          "Node.js",
-          "MongoDB",
-        ],
+        technologies: ["React", "Node.js", "MongoDB"],
       },
 
       "K.S Blogs": {
@@ -136,11 +116,7 @@ const KuldeepAI = () => {
         description:
           "K.S Blogs is a blog management application with authentication and CRUD functionality.",
 
-        technologies: [
-          "React",
-          "Express",
-          "MongoDB",
-        ],
+        technologies: ["React", "Express", "MongoDB"],
 
         features: [
           "Authentication",
@@ -163,10 +139,7 @@ const KuldeepAI = () => {
         description:
           "KS Weather App is a weather application that displays current weather and forecast information.",
 
-        technologies: [
-          "React",
-          "Weather API",
-        ],
+        technologies: ["React", "Weather API"],
       },
 
       "Population Explorer": {
@@ -191,13 +164,26 @@ const KuldeepAI = () => {
     internship:
       "Kuldeep successfully completed an internship at Codomax.",
 
-    github:
-      "https://github.com/kuldeepsengar01",
+    github: "https://github.com/kuldeepsengar01",
 
     certificates: [
-      "Codomax Internship Certificate",
-      "JavaScript Certificate",
-      "HTML Certificate"
+      {
+        name: "Codomax Internship Certificate",
+        type: "Internship",
+      },
+
+      {
+        name: "JavaScript Certificate",
+        type: "JavaScript",
+      },
+
+      {
+        name: "HTML Certificate",
+        type: "HTML",
+        platform: "Codeliber",
+        completedOn: "September 19, 2026",
+        link: "https://codeliber.com/certificates/mu7ru5j0km3oc",
+      },
     ],
   };
 
@@ -249,6 +235,32 @@ const KuldeepAI = () => {
 
   const detectIntent = (question) => {
     const q = normalize(question);
+
+    // HTML CERTIFICATE
+    if (
+      hasAny(q, [
+        "html certificate",
+        "certificate html",
+        "html certification",
+        "html course certificate",
+        "certificate of html",
+        "html codeliber",
+      ])
+    ) {
+      return "htmlCertificate";
+    }
+
+    // CERTIFICATES
+    if (
+      hasAny(q, [
+        "certificate",
+        "certificates",
+        "certification",
+        "certifications",
+      ])
+    ) {
+      return "certificates";
+    }
 
     // TECHNOLOGY
     if (
@@ -376,18 +388,6 @@ const KuldeepAI = () => {
       return "github";
     }
 
-    // CERTIFICATE
-    if (
-      hasAny(q, [
-        "certificate",
-        "certificates",
-        "certification",
-        "certifications",
-      ])
-    ) {
-      return "certificates";
-    }
-
     // ABOUT
     if (
       hasAny(q, [
@@ -407,15 +407,17 @@ const KuldeepAI = () => {
   };
 
   // =====================================================
-  // ANSWER: ABOUT
+  // ABOUT ANSWER
   // =====================================================
 
   const aboutAnswer = () => {
-    return `Kuldeep Sengar is a Full Stack Web Developer currently pursuing BCA at Aligarh College of Engineering & Technology. He works with technologies like React, JavaScript, Node.js, Express, MongoDB, MySQL and Java.`;
+    return `Kuldeep Sengar is a Full Stack Web Developer currently pursuing BCA at Aligarh College of Engineering & Technology.
+
+He works with technologies like React, JavaScript, Node.js, Express, MongoDB, MySQL and Java.`;
   };
 
   // =====================================================
-  // ANSWER: SKILLS
+  // SKILLS ANSWER
   // =====================================================
 
   const skillsAnswer = () => {
@@ -447,7 +449,7 @@ Tools:
   };
 
   // =====================================================
-  // ANSWER: TECHNOLOGY
+  // TECHNOLOGY ANSWER
   // =====================================================
 
   const technologyAnswer = (projectName) => {
@@ -456,7 +458,9 @@ Tools:
 
       return `${projectName} was built using:
 
-${project.technologies.map((tech) => `• ${tech}`).join("\n")}`;
+${project.technologies
+  .map((tech) => `• ${tech}`)
+  .join("\n")}`;
     }
 
     return `Kuldeep works with technologies such as:
@@ -474,7 +478,7 @@ ${project.technologies.map((tech) => `• ${tech}`).join("\n")}`;
   };
 
   // =====================================================
-  // ANSWER: PROJECTS
+  // PROJECT ANSWER
   // =====================================================
 
   const projectsAnswer = (projectName) => {
@@ -486,15 +490,21 @@ ${project.technologies.map((tech) => `• ${tech}`).join("\n")}`;
 ${project.description}`;
 
       if (project.technologies) {
-        answer += `\n\nTechnologies:\n${project.technologies
-          .map((tech) => `• ${tech}`)
-          .join("\n")}`;
+        answer += `
+
+Technologies:
+${project.technologies
+  .map((tech) => `• ${tech}`)
+  .join("\n")}`;
       }
 
       if (project.features) {
-        answer += `\n\nFeatures:\n${project.features
-          .map((feature) => `• ${feature}`)
-          .join("\n")}`;
+        answer += `
+
+Features:
+${project.features
+  .map((feature) => `• ${feature}`)
+  .join("\n")}`;
       }
 
       return answer;
@@ -578,14 +588,35 @@ ${kuldeep.github}`;
   };
 
   // =====================================================
-  // CERTIFICATE ANSWER
+  // HTML CERTIFICATE ANSWER
+  // =====================================================
+
+  const htmlCertificateAnswer = () => {
+    return `Kuldeep completed an HTML course from Codeliber.
+
+Certificate Details:
+
+• Course: HTML
+• Platform: Codeliber
+• Completed: September 19, 2026
+
+Certificate:
+https://codeliber.com/certificates/mu7ru5j0km3oc`;
+  };
+
+  // =====================================================
+  // ALL CERTIFICATES ANSWER
   // =====================================================
 
   const certificateAnswer = () => {
     return `Kuldeep has certificates including:
 
 • Codomax Internship Certificate
-• JavaScript Certificate`;
+• JavaScript Certificate
+• HTML Certificate — Codeliber
+
+HTML Certificate:
+https://codeliber.com/certificates/mu7ru5j0km3oc`;
   };
 
   // =====================================================
@@ -624,6 +655,9 @@ ${kuldeep.github}`;
       case "github":
         return githubAnswer();
 
+      case "htmlCertificate":
+        return htmlCertificateAnswer();
+
       case "certificates":
         return certificateAnswer();
 
@@ -631,19 +665,15 @@ ${kuldeep.github}`;
         break;
     }
 
-    // ---------------------------------------------
     // PROJECT ONLY QUESTIONS
-    // ---------------------------------------------
 
     if (project) {
       return projectsAnswer(project);
     }
 
-    // ---------------------------------------------
-    // GREETINGS
-    // ---------------------------------------------
-
     const q = normalize(question);
+
+    // GREETINGS
 
     if (
       hasAny(q, [
@@ -658,9 +688,7 @@ ${kuldeep.github}`;
       return "Hello 👋 I'm KuldeepAI. What would you like to know about Kuldeep?";
     }
 
-    // ---------------------------------------------
     // THANK YOU
-    // ---------------------------------------------
 
     if (
       hasAny(q, [
@@ -673,9 +701,7 @@ ${kuldeep.github}`;
       return "You're welcome 😊 Feel free to ask me anything about Kuldeep.";
     }
 
-    // ---------------------------------------------
     // UNKNOWN
-    // ---------------------------------------------
 
     return `I'm KuldeepAI 🤖
 
@@ -690,10 +716,16 @@ I can tell you about:
 • Current learning
 • Internship
 • Certificates
+• HTML Certificate
 • GitHub
 
 Try asking something like:
-"What technologies were used in the chat application?"`;
+
+"What technologies were used in the chat application?"
+
+or
+
+"Show me Kuldeep's HTML certificate."`;
   };
 
   // =====================================================
@@ -738,7 +770,19 @@ Try asking something like:
   // =====================================================
 
   const askSuggestion = (question) => {
-    setInput(question);
+    if (typing) return;
+
+    setInput("");
+    setTyping(true);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        sender: "user",
+        text: question,
+      },
+    ]);
 
     setTimeout(() => {
       const answer = getAnswer(question);
@@ -746,17 +790,14 @@ Try asking something like:
       setMessages((prev) => [
         ...prev,
         {
-          id: Date.now(),
-          sender: "user",
-          text: question,
-        },
-        {
           id: Date.now() + 1,
           sender: "ai",
           text: answer,
         },
       ]);
-    }, 300);
+
+      setTyping(false);
+    }, 600);
   };
 
   // =====================================================
@@ -771,6 +812,9 @@ Try asking something like:
         text: "Chat cleared 👋 What would you like to know about Kuldeep?",
       },
     ]);
+
+    setInput("");
+    setTyping(false);
   };
 
   // =====================================================
@@ -784,6 +828,35 @@ Try asking something like:
   }, [messages, typing]);
 
   // =====================================================
+  // RENDER MESSAGE WITH CLICKABLE LINKS
+  // =====================================================
+
+  const renderMessage = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+    const parts = text.split(urlRegex);
+
+    return parts.map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 underline underline-offset-2"
+          >
+            View Certificate
+            <ExternalLink size={12} />
+          </a>
+        );
+      }
+
+      return part;
+    });
+  };
+
+  // =====================================================
   // UI
   // =====================================================
 
@@ -794,6 +867,7 @@ Try asking something like:
       {!open && (
         <button
           onClick={() => setOpen(true)}
+          aria-label="Open KuldeepAI"
           className="
             fixed bottom-6 right-6 z-[999]
             w-16 h-16
@@ -876,11 +950,13 @@ Try asking something like:
             <div className="flex gap-1">
               <button
                 onClick={clearChat}
+                aria-label="Clear chat"
                 className="
                   p-2 rounded-lg
                   text-gray-400
                   hover:text-white
                   hover:bg-white/10
+                  transition
                 "
               >
                 <Trash2 size={17} />
@@ -888,11 +964,13 @@ Try asking something like:
 
               <button
                 onClick={() => setOpen(false)}
+                aria-label="Close KuldeepAI"
                 className="
                   p-2 rounded-lg
                   text-gray-400
                   hover:text-white
                   hover:bg-white/10
+                  transition
                 "
               >
                 <X size={20} />
@@ -951,11 +1029,13 @@ Try asking something like:
                       }
                     `}
                   >
-                    {message.text}
+                    {renderMessage(message.text)}
                   </div>
                 </div>
               </div>
             ))}
+
+            {/* TYPING */}
 
             {typing && (
               <div className="flex items-center gap-2">
@@ -980,12 +1060,16 @@ Try asking something like:
                 >
                   <div className="flex gap-1">
                     <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+
                     <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:150ms]" />
+
                     <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:300ms]" />
                   </div>
                 </div>
               </div>
             )}
+
+            {/* SUGGESTIONS */}
 
             {messages.length === 1 && !typing && (
               <div>
@@ -999,6 +1083,7 @@ Try asking something like:
                     "What technology was used in the chat application?",
                     "Tell me about Kuldeep's projects",
                     "What is Kuldeep currently learning?",
+                    "Show me Kuldeep's HTML certificate",
                   ].map((question) => (
                     <button
                       key={question}
@@ -1038,6 +1123,7 @@ Try asking something like:
                 rounded-xl
                 p-1.5
                 focus-within:border-purple-500/50
+                transition
               "
             >
               <input
@@ -1058,13 +1144,16 @@ Try asking something like:
                   text-sm
                   px-2
                   placeholder:text-gray-600
+                  min-w-0
                 "
               />
 
               <button
                 onClick={sendMessage}
                 disabled={!input.trim() || typing}
+                aria-label="Send message"
                 className="
+                  shrink-0
                   w-9 h-9
                   rounded-lg
                   bg-purple-600
@@ -1072,6 +1161,8 @@ Try asking something like:
                   flex items-center justify-center
                   hover:bg-purple-500
                   disabled:opacity-30
+                  disabled:cursor-not-allowed
+                  transition
                 "
               >
                 <Send size={17} />
