@@ -68,6 +68,19 @@ const Projects = () => {
       github: "https://github.com/kuldeepsengar01/KS-short-music",
       live: "https://ks-short-music.onrender.com/",
     },
+    {
+      title:"Blog Mangement",
+      type: "FULL STACK",
+      description: "Modern blog management system with authentication, CRUD operations, responsive UI, and backend API integration.",
+      technologies: [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "JWT",
+        "Rest API",
+      ],
+      github: "https://github.com/kuldeepsengar01/Blog-Authentication-and-Create-Post",
+    },
   ];
 
   return (
